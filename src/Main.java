@@ -3,25 +3,28 @@ public class Main {
 	    GatherInput gatherer1 = new GatherInput();
 		
 		String[] none = {"none"};
-		System.out.println("What data? (it doesn't matter what you type here if you want to load data)");
-		String data = gatherer1.gather(none);
-		System.out.println("Where should the data be stored/loaded from? (include file extension)");
-		String location = gatherer1.gather(none);
-
-		String[] commands = {"save", "load"};
-		System.out.println("What do you want to do to the data?");
+		
+		System.out.println("What would you like to do?");
+		String[] commands = {"save", "load", "delete"};
 		String command = gatherer1.gather(commands);
 
 		switch(command) {
 			case "save":
-				if (gatherer1.save(location, data)) {
-					System.out.println("Save of \"" + data + "\" in " + location + " successful.");
+				System.out.println("What do you want to save?");
+				String data = gatherer1.gather(none);
+				System.out.println("Where do you want to save it?");
+				String locationToSave = gatherer1.gather(none);
+				if (gatherer1.save(locationToSave, data)) {
+					System.out.println("Save of \"" + data + "\" in " + locationToSave + " successful.");
 				}
 				break;
 			case "load":
-				System.out.println("Data loaded:\n" + gatherer1.load(location));
+				System.out.println("Where do you want to load from?");
+				String locationToLoad = gatherer1.gather(none);
+				System.out.println("Data loaded:\n" + gatherer1.load(locationToLoad));
 			default:
 				break;
 		}
+
 	}
 }
